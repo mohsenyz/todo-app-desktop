@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mphj TODO</title>
+    <link rel="stylesheet" href="../../asset/css/style.css">
+    <link rel="stylesheet" href="../../asset/css/rangeslider.min.css">
+    <script src="../../asset/js/jquery.js"></script>
+    <script src="../../app/helper.js"></script>
+    <script src="../../app/win.js"></script>
+    <script src="../../asset/js/jquery.slim.min.js"></script>
+    <script src="../../asset/js/rangeslider.min.js"></script>
+</head>
+<body>
+<remote-view src="../modal_navbar.html"></remote-view>
+<div class="well">
+    <input type="text" id="todo-title" placeholder="Enter TODO title">
+    <textarea id="todo-content" placeholder="Enter TODO content! (Supports any html tag)"></textarea>
+    <p><input type="checkbox" id="is_marked" /><label for="is_marked"><span class="ui"></span>Mark as important</label></p>
+    <button class="card-bottom-button bg-purple" onclick="changeTODO();">Submit!</button>
+    <div id="range" style="width: 360px;margin: 0px auto;"></div>
+</div>
+</body>
+<script>
+    var ipc = require('electron').ipcRenderer;
+    window._range = null;
+    window._todo = null;
+    window._current_progress = 10;
+    $(document).ready(function () {
+        Helper.initViews();
+    });
+    ipc.on('todo-set', function(event, args){
+        args = JSON.parse(args);
+        window._todo = args;
+        $("#todo-title").val(args.title);
+        $("#todo-content").val(args.content);
+        $("#is_marked").prop('checked', args.marked == 1);
+        if (args.status == 0){
+            window._current_progress = 0;
+        } else if (args.status == 2){
+            window._current_progress = 100;
+        } else {
+            window._current_progress = args.progress;
+        }
+        window._range = new RangeSlider($("#range"), {
+            size: 1,
+            borderSize: 0.4,
+            percentage: window._current_progress,
+            onUp: function (event, progress) {
+                window._current_progress = Math.round(progress);
+            }
+        });
+    });
+
+    function changeTODO(){
+        window._todo.title = $("#todo-title").val();
+        window._todo.content = $("#todo-content").val();
+        window._todo.marked = $("#is_marked").is(":checked");
+        window._todo.progress = window._current_progress;
+        App.loadRoute('changeTODO', JSON.stringify(window._todo));
+        App.closeModal();
+    }
+</script>
+</html>

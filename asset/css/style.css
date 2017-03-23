@@ -1,0 +1,417 @@
+::-webkit-input-placeholder {
+    /*color: #909;*/
+}
+@font-face {
+    font-family: 'latolatin-thin';
+    src: url('../fonts/latolatin-thin.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+
+@font-face {
+    font-family: 'latolatin-medium';
+    src: url('../fonts/latolatin-medium.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+
+@font-face {
+    font-family: 'opensans-medium';
+    src: url('../fonts/opensans-medium.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+/*
+End fonts
+ */
+
+*{
+    transition: 0.3s;
+    font-family: opensans-medium;
+    user-select: none;
+    outline: none;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    background: url('../images/main_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 28px 0px 0px 0px;
+    overflow: hidden;
+}
+
+
+toolbar{
+    background: #222;
+    display: block;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    box-shadow: 0px 0px 7px #383838;
+    text-align: right;
+    -webkit-app-region: drag;
+}
+toolbar b{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 5px 4px;
+    box-shadow: 0px 0px 10px black inset;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+toolbar b:last-child{
+    margin-right: 10px;
+}
+
+toolbar b:hover{
+    box-shadow: 0px 0px 5px black inset;
+}
+
+toolbar .toolbar-exit{
+    background: red;
+}
+toolbar .toolbar-info{
+    background: deepskyblue;
+}
+toolbar .toolbar-minimize{
+    background: green;
+}
+
+/*
+Toolbar completed
+ */
+
+.bg-red{
+    background-color: #f44336;
+}
+.bg-pink{
+    background-color: #e91e63;
+}
+.bg-purple{
+    background-color: #9c27b0;
+}
+.bg-deep-purple{
+    background-color: #673ab7;
+}
+
+.bg-indigo-darken{
+    background-color: #1a237e;
+}
+
+.bg-gray{
+    background-color: gray;
+}
+
+
+
+/*
+Helper completed
+ */
+.todo-slider ul li section{
+    display: block;
+    position: relative;
+    width: 180px;
+    height: 150px;
+    text-align: center;
+    margin: 10px auto 0px auto;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.todo-slider ul li section header{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.todo-slider ul li section progressbar{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: rgba(17, 17, 17, 0.71);
+    opacity: 1;
+    height: 3px;
+}
+
+.todo-slider ul li section progressbar p-shadow{
+    width: 20px;
+    box-shadow: 2px 0px 7px #000;
+    height: 3px;
+    float: right;
+    opacity: 0.7;
+}
+
+.todo-slider ul li section p{
+    color: white;
+    margin: 0;
+    padding: 0px 10px 5px 10px;
+    font-size: small;
+    text-overflow: ellipsis;
+    max-height: 50px;
+}
+
+.todo-slider ul li section h1{
+    color: white;
+    font-family: latolatin-thin;
+    font-size: x-large;
+    margin: 0px;
+    padding: 15px 5px 5px 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+.todo-slider ul li section footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.todo-slider ul li section footer button.footer-button{
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    border: 0;
+    background: #111;
+    opacity: 0.8;
+    color: white;
+    font-family: latolatin-medium;
+    text-align: center;
+    padding: 7px 15px;
+    cursor: pointer;
+}
+
+
+.todo-slider ul li section footer button.footer-button:hover{
+    opacity: 0.9;
+}
+
+
+.todo-slider ul li section:hover footer button.footer-button{
+    transform: translateY(-100%);
+}
+
+
+/*
+End of slider
+ */
+
+/*
+https://www.creativejuiz.fr/trytotry/custom-checkbox-full-css3-flat-ui.html
+ */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 75px;
+    cursor: pointer;
+}
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before,
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: '';
+    position: absolute;
+}
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+    left:0; top: -3px;
+    width: 65px; height: 30px;
+    background: #DDDDDD;
+    border-radius: 15px;
+    -webkit-transition: background-color .2s;
+    -moz-transition: background-color .2s;
+    -ms-transition: background-color .2s;
+    transition: background-color .2s;
+}
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    width: 20px; height: 20px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    transition: all .2s;
+    border-radius: 50%;
+    background: #7F8C9A;
+    top: 2px; left: 5px;
+}
+
+/* on checked */
+[type="checkbox"]:checked + label:before {
+    background:#34495E;
+}
+[type="checkbox"]:checked + label:after {
+    background: #39D2B4;
+    top: 2px; left: 40px;
+}
+
+[type="checkbox"]:checked + label .ui,
+[type="checkbox"]:not(:checked) + label .ui:before,
+[type="checkbox"]:checked + label .ui:after {
+    position: absolute;
+    left: 6px;
+    width: 65px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 22px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    transition: all .2s;
+}
+[type="checkbox"]:not(:checked) + label .ui:before {
+    content: "no";
+    left: 32px
+}
+[type="checkbox"]:checked + label .ui:after {
+    content: "yes";
+    color: #39D2B4;
+}
+[type="checkbox"]:focus + label:before {
+    border: 1px dashed #777;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: -1px;
+}
+
+
+/*
+End of custom checkbox
+ */
+.card-red{
+    border-top-color: #f44336 !important;
+}
+.card-pink{
+    border-top-color: #e91e63 !important;
+}
+.card-purple{
+    border-top-color: #9c27b0 !important;
+}
+.card-deep-purple{
+    border-top-color: #673ab7 !important;
+}
+
+.card{
+    background: #fff;
+    padding: 5px 10px 40px 10px;
+    border-top: 4px white solid;
+    margin: 10px auto;
+    width: 90%;
+    position: relative;
+    box-shadow: 0px 0px 10px #333;
+    max-width: 400px;
+}
+
+.card-bottom-button{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    border: 0;
+    color: white;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.card-bottom-button:hover{
+    opacity: 1;
+}
+
+
+input[type="text"], textarea{
+    display: block;
+    width: 100%;
+    border: 0px;
+    background: transparent;
+    border-bottom: 2px #297cde solid;
+    font-family: latolatin-medium;
+    font-size: 16px;
+    padding: 3px 7px;
+    color: #333;
+    margin-top: 10px;
+}
+
+input[type="text"]:first-child, textarea:first-child{
+    margin-top: 5px !important;
+}
+
+input[type="text"]:focus, textarea:focus{
+    border-bottom-color: #ffc107;
+}
+
+label{
+    color: #333;
+}
+
+
+/*
+End form
+ */
+
+
+footer.main-footer{
+    text-align: center;
+    font-family: latolatin-thin;
+    color: #eaeaea;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+footer span.show-more-todo{
+    position: relative;
+    bottom: -9px;
+    text-shadow: 0px 0px 10px gray;
+}
+.rotate-90{
+    transform: rotate(90deg);
+    font-size: xx-large;
+    display: block;
+    font-family: latolatin-medium;
+    margin-top: -12px;
+}
+
+
+/*
+End of main window
+ */
+
+
+
+.well{
+    background: rgba(256, 256, 256, 1);
+    padding: 10px;
+    margin: 10px auto;
+    width: 90%;
+}
