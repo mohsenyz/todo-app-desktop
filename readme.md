@@ -7,10 +7,10 @@ Mphj TODO is very simple to use and beautiful application for TODO managing
  * Define progress for TODO
   
   
- ![Screenshot](https://t15i.imgup.net/Screenshot5aba.png)
- ![Screenshot](https://z76i.imgup.net/Screenshot61de.png)
- ![Screenshot](https://p21i.imgup.net/Screenshotba7e.png)
- ![Screenshot](https://v80i.imgup.net/Screenshot741e.png)
+ <img src="http://imgh.us/Screenshot_from_2017-03-23_17:45:35.png"/>
+ <img src="http://imgh.us/Screenshot_from_2017-03-23_17:44:31.png"/>
+ <img src="http://imgh.us/Screenshot_from_2017-03-23_17:43:55.png"/>
+ <img src="http://imgh.us/Screenshot_from_2017-03-23_17:32:49.png"/>
 
 
 to install, just clone the repo and in the root dir try these commands:
