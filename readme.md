@@ -15,7 +15,7 @@ Mphj TODO is very simple to use and beautiful application for TODO managing
 
 to install, just clone the repo and in the root dir try these commands:
 
-```unix
+```unixg
 npm install && ./node_module/.bin/electron .
 ```
 
