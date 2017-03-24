@@ -86,6 +86,15 @@ ipcMain.on('route-getMarkedTodoList', function(event){
     event.returnValue = JSON.stringify(Todo.select('marked = 1 AND status != 2'));
 });
 
+ipcMain.on('route-getUnFinishedTodo', function(event){
+    event.returnValue = JSON.stringify(Todo.select('status != 2'));
+});
+
+ipcMain.on('route-getFinishedTodo', function(event){
+    event.returnValue = JSON.stringify(Todo.select('status = 2'));
+});
+
+
 
 ipcMain.on('route-makeNewTODO', function (event, args) {
     args = JSON.parse(args);
@@ -94,7 +103,8 @@ ipcMain.on('route-makeNewTODO', function (event, args) {
     console.log('New TODO (' + args.title + ' => ' + args.content + ') created!');
     notifier.notify({
         'title': 'Mphj TODO',
-        'message': 'TODO has created!'
+        'message': 'TODO has created!',
+        'icon': path.join(__dirname, 'asset/ico.png')
     });
 });
 
@@ -141,7 +151,8 @@ ipcMain.on('route-changeTODO', function (event, data) {
     event.returnValue = 1;
     notifier.notify({
         'title': 'Mphj TODO',
-        'message': 'TODO has changed!'
+        'message': 'TODO has changed!',
+        'icon': path.join(__dirname, 'asset/ico.png')
     });
 });
 

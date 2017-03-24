@@ -23,12 +23,27 @@
     <button class="card-bottom-button bg-purple" onclick="makeNewTODO();">Make New TODO!</button>
 </div>
 
-<footer class="main-footer">
-    <span class="show-more-todo">
+<footer class="main-footer small-screen">
+    <span class="show-more-todo" onclick="showAllTodo()">
     See All TODO
         <span class="rotate-90">></span>
     </span>
+
+    <div id="all-todo">
+        <div id="all-todo-tabs" onclick="showAllTodo()">
+            <span class="active" onclick="showInProgressTODO(this)">
+                In progress
+            </span>
+            <span onclick="showFinishedTODO(this)">
+                Finished
+            </span>
+        </div>
+        <div id="all-todo-container" class="all-todo">
+        </div>
+    </div>
 </footer>
+<button class="card-bottom-button" style="position: fixed; bottom: 0px; background: #297cde; display: none; z-index: 12;" id="btn-back" onclick="hideAllTodo()">Back</button>
+
 </body>
 <script>
     const colorArray = ['red', 'pink', 'purple', 'deep-purple'];
@@ -38,6 +53,7 @@
         Helper.initViews();
         colorArray.sort(function() { return 0.5 - Math.random() });
         updateMarkedTodoSlider();
+        updateInProgressTodo();
     });
 
 
@@ -110,6 +126,12 @@
 
         openTODOById(todo_id);
     }
+
+
+    function openTODOFromAll(element){
+        todo_id = $(element).attr('todo-id');
+        openTODOById(todo_id);
+    }
     function openTODOById(id){
         App.loadRoute('openTODOModal', id);
     }
@@ -124,5 +146,83 @@
     ipc.on('event-close-modal', function () {
         updateMarkedTodoSlider();
     });
+
+
+
+    function showAllTodo() {
+        $("footer.main-footer").removeClass("small-screen").addClass("full-screen");
+        $("#btn-back").fadeIn();
+    }
+
+    function hideAllTodo() {
+        $("footer.main-footer").removeClass("full-screen").addClass("small-screen");
+        $("#btn-back").fadeOut();
+    }
+
+
+
+    function updateInProgressTodo(){
+        result = App.loadRoute('getUnFinishedTodo');
+        result = JSON.parse(result);
+        if (result.length == 0)
+            return;
+        template = App.loadRoute('templates', '/views/template/todo-list-section.html');
+        $("#all-todo-container").html("");
+        for (i = 0; i < result.length; i++){
+            item = result[i];
+            item_temp = $(template);
+            item_temp.find("h1").html(item.title);
+            item_temp.find("p").html(item.content);
+            item_temp.attr('todo-id', '' + item.id);
+            item_temp.find("progressbar").css("width", '' + item.progress + '%');
+            if ((i + 1) < colorArray.length){
+                item_temp.attr('class', 'bg-' + colorArray[i]);
+            }else{
+                item_temp.attr('class', 'bg-' + colorArray[Math.round(i % colorArray.length)]);
+            }
+            $("#all-todo-container").append(item_temp);
+        }
+        $("#all-todo-container").append('<br><br><h1>--</h1>');
+    }
+
+
+
+    function updateFinishedTodo(){
+        result = App.loadRoute('getFinishedTodo');
+        result = JSON.parse(result);
+        if (result.length == 0)
+            return;
+        template = App.loadRoute('templates', '/views/template/todo-list-section.html');
+        $("#all-todo-container").html("");
+        for (i = 0; i < result.length; i++){
+            item = result[i];
+            item_temp = $(template);
+            item_temp.find("h1").html(item.title);
+            item_temp.find("p").html(item.content);
+            item_temp.attr('todo-id', '' + item.id);
+            item_temp.find("progressbar").css("width", '' + item.progress + '%');
+            if ((i + 1) < colorArray.length){
+                item_temp.attr('class', 'bg-' + colorArray[i]);
+            }else{
+                item_temp.attr('class', 'bg-' + colorArray[Math.round(i % colorArray.length)]);
+            }
+            $("#all-todo-container").append(item_temp);
+        }
+        $("#all-todo-container").append('<br><br><h1>--</h1>');
+    }
+
+
+
+    function showInProgressTODO(ele) {
+        $("#all-todo-tabs span").removeClass("active");
+        $(ele).addClass("active");
+        updateInProgressTodo();
+    }
+
+    function showFinishedTODO(ele) {
+        $("#all-todo-tabs span").removeClass("active");
+        $(ele).addClass("active");
+        updateFinishedTodo();
+    }
 </script>
 </html>

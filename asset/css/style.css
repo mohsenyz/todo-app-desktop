@@ -60,6 +60,7 @@ toolbar{
     box-shadow: 0px 0px 7px #383838;
     text-align: right;
     -webkit-app-region: drag;
+    z-index: 15;
 }
 toolbar b{
     width: 18px;
@@ -162,8 +163,11 @@ Helper completed
     margin: 0;
     padding: 0px 10px 5px 10px;
     font-size: small;
-    text-overflow: ellipsis;
     max-height: 50px;
+    word-spacing: normal !important;
+    display: block;
+    overflow: hidden;
+    white-space: pre-line;
 }
 
 .todo-slider ul li section h1{
@@ -337,7 +341,7 @@ End of custom checkbox
     left: 0px;
     display: block;
     width: 100%;
-    padding: 10px 15px;
+    padding: 12px 15px;
     border: 0;
     color: white;
     opacity: 0.9;
@@ -388,11 +392,13 @@ footer.main-footer{
     bottom: 0px;
     left: 0px;
     width: 100%;
+    z-index: 10;
 }
-footer span.show-more-todo{
+footer.main-footer span.show-more-todo{
     position: relative;
     bottom: -9px;
     text-shadow: 0px 0px 10px gray;
+    cursor: pointer;
 }
 .rotate-90{
     transform: rotate(90deg);
@@ -401,7 +407,62 @@ footer span.show-more-todo{
     font-family: latolatin-medium;
     margin-top: -12px;
 }
+footer.main-footer span.show-more-todo:hover .rotate-90{
+    transform: rotate(-90deg);
+}
 
+footer.main-footer span.show-more-todo:hover, footer:hover span.show-more-todo{
+    color: lawngreen;
+}
+footer.small-screen:hover{
+    transform: translateY(-40px);
+}
+
+footer.full-screen{
+    transform: translateY(-470px);
+}
+
+
+
+#all-todo{
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    display: block;
+    background: white;
+    position: absolute;
+    top: 100%;
+    margin: 0 auto;
+}
+#all-todo #all-todo-tabs{
+    display: block;
+    width: 100%;
+    box-shadow: 0px 0px 5px gray;
+    padding: 0;
+    margin: 0;
+}
+#all-todo #all-todo-tabs span{
+    display: inline-block;
+    width: 49.4%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 9px 0px;
+    border-bottom: 3px gray solid;
+    margin: 0;
+    color: #333;
+    font-family: latolatin-medium;
+    cursor: pointer;
+}
+
+
+#all-todo #all-todo-tabs span.active{
+    border-bottom-color: #297cde;
+}
+
+#all-todo #all-todo-tabs span:hover{
+    border-bottom-color: #297cde;
+    color: #297cde;
+}
 
 /*
 End of main window
@@ -414,4 +475,125 @@ End of main window
     padding: 10px;
     margin: 10px auto;
     width: 90%;
+}
+
+
+
+
+
+
+
+
+
+.all-todo section{
+    display: block;
+    position: relative;
+    width: 90%;
+    height: 200px;
+    text-align: center;
+    margin: 10px auto 0px auto;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.all-todo section header{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.all-todo section progressbar{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: rgba(17, 17, 17, 0.71);
+    opacity: 1;
+    height: 3px;
+}
+
+.all-todo section progressbar p-shadow{
+    width: 20px;
+    box-shadow: 2px 0px 7px #000;
+    height: 3px;
+    float: right;
+    opacity: 0.7;
+}
+
+.all-todo section p{
+    color: white;
+    margin: 0;
+    padding: 0px 10px 5px 10px;
+    font-size: small;
+    max-height: 100px;
+    word-spacing: normal !important;
+    display: block;
+    overflow: hidden;
+    white-space: pre-line;
+    position: relative;
+}
+
+.all-todo section h1{
+    color: white;
+    font-family: latolatin-thin;
+    font-size: x-large;
+    margin: 0px;
+    padding: 15px 5px 5px 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+.all-todo section footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.all-todo section footer button.footer-button{
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    border: 0;
+    background: #111;
+    opacity: 0.8;
+    color: white;
+    font-family: latolatin-medium;
+    text-align: center;
+    padding: 7px 15px;
+    cursor: pointer;
+}
+
+
+.all-todo section footer button.footer-button:hover{
+    opacity: 0.9;
+}
+
+
+.all-todo section:hover footer button.footer-button{
+    transform: translateY(-100%);
+}
+
+.all-todo section:last-child{
+    margin-bottom: 30px;
+}
+
+
+
+#all-todo-container{
+    display: block;
+    background: white;
+    margin-top: 5px;
+    height: 500px;
+    overflow-y: scroll;
+    position: relative;
+    padding-bottom: 60px;
 }
