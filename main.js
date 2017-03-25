@@ -55,7 +55,6 @@ ipcMain.on('event-minimize-window', function () {
 
 
 ipcMain.on('event-show-modal', function (event, name) {
-    console.log(name);
     switch (name){
         case 'info':
             modal = new BrowserWindow({parent: win, modal: true, show: false, transparent: true, frame: false, width: 500, height: 200});
@@ -115,7 +114,7 @@ ipcMain.on('route-templates', function (event, args) {
 
 
 ipcMain.on('route-openTODOModal', function(event, args){
-    modal = new BrowserWindow({parent: win, modal: true, show: false, transparent: true, frame: false, width: 500, height: 280});
+    modal = new BrowserWindow({parent: win, modal: true, show: false, transparent: true, frame: false, width: 500, height: 315});
     modal.loadURL(url.format({
         pathname: path.join(__dirname, 'views/modal/todo.html'),
         protocol: 'file:',
@@ -152,6 +151,19 @@ ipcMain.on('route-changeTODO', function (event, data) {
     notifier.notify({
         'title': 'Mphj TODO',
         'message': 'TODO has changed!',
+        'icon': path.join(__dirname, 'asset/ico.png')
+    });
+});
+
+
+
+ipcMain.on('route-deleteTODO', function (event, data) {
+    todo_item = Todo.byId(data);
+    todo_item.delete();
+    event.returnValue = 1;
+    notifier.notify({
+        'title': 'Mphj TODO',
+        'message': 'TODO has deleted!',
         'icon': path.join(__dirname, 'asset/ico.png')
     });
 });

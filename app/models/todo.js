@@ -26,7 +26,7 @@
     };
 
     Todo.select = function(stmt){
-        return DB.selectByStmt(Todo._db, Todo._name, stmt);
+        return DB.selectByStmt(Todo._db, Todo._name, Todo._key, stmt);
     };
     module.exports = Todo;
 }());

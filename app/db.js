@@ -49,22 +49,38 @@
             + " WHERE " + _key + " = " + key
         );
     };
+    DB.deleteByObj = function(db, table, obj, _key){
+        arr = Helper.objToArr(obj);
+        key = Helper.getValueByKey(_key, arr);
+        arr = arr.join(',');
+        db.run(
+            "DELETE FROM " + table
+            + " WHERE " + _key + " = " + key
+        );
+    };
     DB.getById = function(db, table, key, id){
         var stmt = db.prepare("SELECT * FROM " + table + " where " + key + " = $id");
         stmt = stmt.getAsObject({$id : id});
-        stmt.update = function(){
-            DB.updateByObj(db, table, this, key);
-        };
-        return stmt;
+        return DB.completeOrm(stmt, db, table, key);
     };
-    DB.selectByStmt = function(db, table, stmt){
+    DB.selectByStmt = function(db, table, key, stmt){
         stmt = db.prepare("SELECT * FROM " + table + " WHERE " + stmt);
         var result = [];
         while(stmt.step()) {
             var row = stmt.getAsObject();
-            result.push(row);
+            result.push(DB.completeOrm(row, db, table, key));
         }
         return result;
+    };
+
+    DB.completeOrm = function (stmt, db, table, key) {
+        stmt.update = function(){
+            DB.updateByObj(db, table, this, key);
+        };
+        stmt.delete = function(){
+            DB.deleteByObj(db, table, this, key);
+        };
+        return stmt;
     };
     module.exports = DB;
 }());

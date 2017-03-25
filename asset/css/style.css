@@ -429,7 +429,6 @@ footer.full-screen{
     max-width: 400px;
     height: 100%;
     display: block;
-    background: white;
     position: absolute;
     top: 100%;
     margin: 0 auto;
@@ -440,6 +439,9 @@ footer.full-screen{
     box-shadow: 0px 0px 5px gray;
     padding: 0;
     margin: 0;
+    position: absolute;
+    background: white;
+    z-index: 12;
 }
 #all-todo #all-todo-tabs span{
     display: inline-block;
@@ -472,9 +474,25 @@ End of main window
 
 .well{
     background: rgba(256, 256, 256, 1);
-    padding: 10px;
-    margin: 10px auto;
+    padding: 10px 10px 20px 10px;
+    margin: 10px auto 40px auto;
     width: 90%;
+    position: relative;
+}
+
+
+.well img.center-icon-50{
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    margin-left: -25px;
+    box-shadow: 0px 0px 5px gray;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.well img.center-icon-50:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px #197cde;
 }
 
 
@@ -591,9 +609,12 @@ End of main window
 #all-todo-container{
     display: block;
     background: white;
-    margin-top: 5px;
+    margin-top: 0px;
     height: 500px;
     overflow-y: scroll;
-    position: relative;
-    padding-bottom: 60px;
+    position: absolute;
+    padding-top: 5px;
+    z-index: 11;
+    top: 40px;
+    width: 100%;
 }

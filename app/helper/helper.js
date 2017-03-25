@@ -25,7 +25,6 @@
     Helper.getValueByKey = function(key, arr){
         for (i = 0; i < arr.length; i++){
             _key = arr[i];
-            console.log(_key);
             if (_key.split('=')[0] == key){
                 return _key.split('=')[1];
             }
